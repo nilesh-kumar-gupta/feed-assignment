@@ -1,0 +1,30 @@
+Requirements
+- Feed page with adding post option
+- landing page is feed page
+- post addition only allowed for authenticated users
+- any action by unauthenticated user should result in opening login
+- dedicated sign in and sign up pages
+- Simple Navbar with forum name and login
+- animations
+- function not implemented for adding images/video
+- no like/comment counter needed
+- show functionailty not implemented for skipped functions
+- Success/Failure Prompts
+
+Routes
+- Feed
+- User Auth
+
+Components
+- Create New Post
+- Post
+- Login
+- Signup
+- Modal
+- Navbar
+- Rich text input
+
+State/Behaviour
+- Feed, list of posts (should be mocked through an api call)
+- Create New Post (formStates, react-hook-form, submit api call)
+- App, user state for authentication, can be in context
