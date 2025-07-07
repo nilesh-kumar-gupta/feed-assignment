@@ -14,6 +14,10 @@ export const Post = ({ post }: PostProps) => {
             src={post.author.avatar}
             alt={`${post.author.name}'s avatar`}
             className="w-12 h-12 object-cover"
+            onError={(event) => {
+              const img = event.target as HTMLImageElement;
+              img.src = '/src/assets/avatar.svg';
+            }}
           />
           <div className="rounded-full bg-gray-100 w-9 h-9 flex items-center justify-center">
             <div className="text-xl">{post.mood}</div>
