@@ -1,5 +1,6 @@
 import useModal from "../hooks/useModal.ts";
 import { createPortal } from "react-dom";
+import closeIcon from '../assets/close.svg';
 
 const Modal = () => {
   const { isOpen, closeModal, modalContent, modalTitle } = useModal();
@@ -25,7 +26,7 @@ const Modal = () => {
             onClick={closeModal}
           >
             <span className="sr-only">Close</span>
-            <img src="/src/assets/close.svg" alt="Close" className="h-6 w-6"/>
+            <img src={closeIcon} alt="Close" className="h-6 w-6"/>
           </button>
         </div>
 
