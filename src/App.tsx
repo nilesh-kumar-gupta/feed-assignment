@@ -6,6 +6,7 @@ import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import { UserProvider } from "./context/UserContext";
 import {ModalProvider} from "./context/ModalContext.tsx";
 import Modal from "./components/Modal.tsx";
+import Navbar from "./components/Navbar.tsx";
 
 
 const queryClient = new QueryClient();
@@ -17,6 +18,9 @@ function App() {
             <UserProvider>
                 <ModalProvider>
                     <Router>
+
+                        <Navbar />
+
                         <Routes>
                             <Route path="/" element={<Feed/>}/>
                             <Route path={ROUTES.FEED} element={<Feed/>}/>

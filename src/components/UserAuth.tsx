@@ -11,8 +11,8 @@ const UserAuth = ({flowType}: UserAuthProps) => {
     const [flow, setFlow] = useState(flowType);
 
     return (
-        <div className="flex flex-col items-center justify-center bg-gray-100 px-4 py-12">
-            <div className="w-full max-w-md">
+        <div className="flex flex-col items-center justify-center px-4 py-12">
+            <div className="w-full max-w-md bounding-container">
                 {flow === "SIGN_IN" ? <SignIn setFlow={setFlow} /> : <SignUp setFlow={setFlow}/>}
             </div>
         </div>
