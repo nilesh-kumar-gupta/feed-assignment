@@ -16,7 +16,7 @@ const loginCredential = [
 export const mockSignIn = async (email: string, password: string): Promise<AuthResponse> => {
     return await new Promise((resolve, reject) => {
         setTimeout(() => {
-            if (loginCredential.includes({email, password})) {
+            if (loginCredential.some((cred) => cred.email === email && cred.password === password)) {
                 const user: IUser = {
                     id: '1',
                     name: 'Test User',
