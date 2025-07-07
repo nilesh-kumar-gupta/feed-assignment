@@ -1,21 +1,12 @@
 /* ReactQuill editor and content styles */
 
 .quill-container .ql-toolbar {
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-  border-bottom: 1px solid #e5e7eb;
-  background-color: #f9fafb;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  padding: 8px;
+  @apply rounded-t-2xl border-b border-gray-200 bg-gray-100 flex flex-wrap items-center p-2;
 }
 
 
 .quill-container .ql-editor {
-  min-height: 120px;
-  font-size: 1rem;
-  line-height: 1.5;
+  @apply min-h-[120px] text-base leading-normal;
 }
 
 /* Ensure toolbar buttons have proper spacing and hover effects */
@@ -43,33 +34,26 @@
 
 /* Style for header dropdown */
 .quill-container .ql-toolbar .ql-header .ql-picker-label {
-  padding: 2px 4px;
+  @apply px-1 py-0.5;
 }
 
 .quill-container .ql-toolbar .ql-header .ql-picker-label.ql-active,
 .quill-container .ql-toolbar .ql-header .ql-picker-item.ql-selected {
-  color: #3b82f6;
-  background-color: white;
-  border-radius: 4px;
+  @apply text-blue-500 bg-white rounded;
 }
 
 .quill-container .ql-toolbar .ql-header .ql-picker-options {
-  background-color: white;
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  @apply bg-white rounded shadow-md;
 }
 
 .quill-container .ql-toolbar .ql-header .ql-picker-item:hover {
-  color: #3b82f6;
-  background-color: #f9fafb;
+  @apply text-blue-500 bg-gray-50;
 }
 
 
 /* Hide default Quill border when focused */
 .quill-container .ql-container:focus-within {
-  border-color: #3b82f6;
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+  @apply border-blue-500 outline-none ring-2 ring-blue-100;
 }
 
 /* Styles for rendered Quill content in posts */
@@ -77,109 +61,86 @@
 /* Text formatting and lists */
 .quill-container .ql-editor strong,
 .ql-editor strong {
-  font-weight: bold;
+  @apply font-bold;
 }
 
 .quill-container .ql-editor em,
 .ql-editor em {
-  font-style: italic;
+  @apply italic;
 }
 
 .quill-container .ql-editor u,
 .ql-editor u {
-  text-decoration: underline;
+  @apply underline;
 }
 
 .quill-container .ql-editor ul,
 .ql-editor ul {
-  list-style-type: disc;
-  margin-left: 1.5em;
-  padding-left: 0;
+  @apply list-disc ml-6;
 }
 
 .quill-container .ql-editor ol,
 .ql-editor ol {
-  list-style-type: decimal;
-  margin-left: 1.5em;
-  padding-left: 0;
+  @apply list-decimal ml-6;
 }
 
 .quill-container .ql-editor li,
 .ql-editor li {
-  margin-bottom: 0.5em;
+  @apply mb-2;
 }
 
 /* Headers */
 .quill-container .ql-editor h1,
 .ql-editor h1 {
-  font-size: 2em;
-  font-weight: bold;
-  margin: 0.67em 0;
+  @apply text-4xl font-bold my-4;
 }
 
 .quill-container .ql-editor h2,
 .ql-editor h2 {
-  font-size: 1.5em;
-  font-weight: bold;
-  margin: 0.83em 0;
+  @apply text-3xl font-bold my-3;
 }
 
 .quill-container .ql-editor h3,
 .ql-editor h3 {
-  font-size: 1.17em;
-  font-weight: bold;
-  margin: 1em 0;
+  @apply text-2xl font-bold my-3;
 }
 
 .quill-container .ql-editor h4,
 .ql-editor h4 {
-  font-size: 1em;
-  font-weight: bold;
-  margin: 1.33em 0;
+  @apply text-xl font-bold my-2;
 }
 
 .quill-container .ql-editor h5,
 .ql-editor h5 {
-  font-size: 0.83em;
-  font-weight: bold;
-  margin: 1.67em 0;
+  @apply text-lg font-bold my-2;
 }
 
 .quill-container .ql-editor h6,
 .ql-editor h6 {
-  font-size: 0.67em;
-  font-weight: bold;
-  margin: 2.33em 0;
+  @apply text-base font-bold my-2;
 }
 
 /* Block elements */
 .quill-container .ql-editor blockquote,
 .ql-editor blockquote {
-  border-left: 4px solid #e5e7eb;
-  padding-left: 16px;
-  margin: 10px 0;
-  font-style: italic;
-  color: #4b5563;
+  @apply border-l-4 border-gray-200 pl-4 my-2.5 italic text-gray-600;
 }
 
 .quill-container .ql-editor pre.ql-syntax,
 .ql-editor pre.ql-syntax {
-  background-color: #f3f4f6;
-  border-radius: 4px;
-  padding: 12px;
-  font-family: monospace;
-  color: #1f2937;
-  overflow-x: auto;
+  @apply bg-gray-100 rounded p-3 font-mono text-gray-800 overflow-x-auto;
 }
 
 .quill-container .ql-editor a,
 .ql-editor a {
-  color: #3b82f6;
-  text-decoration: underline;
+  @apply text-blue-500 underline;
 }
 
 .quill-container .ql-editor img,
 .ql-editor img {
-  max-width: 100%;
-  height: auto;
+  @apply max-w-full h-auto;
+}
+
+.leading-relaxed.ql-editor {
+  @apply pl-0
 }

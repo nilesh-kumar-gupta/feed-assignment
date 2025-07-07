@@ -1,4 +1,5 @@
 import type {IPost, IUser} from "../types/types.ts";
+import avatarIcon from '../../public/avatar.svg';
 
 const postList: IPost[] = [
     {
@@ -10,7 +11,7 @@ const postList: IPost[] = [
             id: crypto.randomUUID(),
             name: 'John Doe',
             email: 'john@example.com',
-            avatar: 'src/assets/avatar.svg'
+            avatar: avatarIcon
         } as IUser
     },
     {
@@ -22,7 +23,7 @@ const postList: IPost[] = [
             id: crypto.randomUUID(),
             name: 'Jane Smith',
             email: 'jane@example.com',
-            avatar: 'src/assets/avatar.svg'
+            avatar: avatarIcon
         } as IUser
     },
     {
@@ -34,7 +35,7 @@ const postList: IPost[] = [
             id: crypto.randomUUID(),
             name: 'John Doe',
             email: 'john@example.com',
-            avatar: 'src/assets/avatar.svg'
+            avatar: avatarIcon
         } as IUser
     },
     {
@@ -46,7 +47,7 @@ const postList: IPost[] = [
             id: crypto.randomUUID(),
             name: 'Mike Johnson',
             email: 'mike@example.com',
-            avatar: 'src/assets/avatar.svg'
+            avatar: avatarIcon
         } as IUser
     },
     {
@@ -58,7 +59,7 @@ const postList: IPost[] = [
             id: crypto.randomUUID(),
             name: 'Jane Smith',
             email: 'jane@example.com',
-            avatar: 'src/assets/avatar.svg'
+            avatar: 'https://ui-avatars.com/api/?background=0D8ABC&color=fff'
         } as IUser
     },
     {
@@ -70,7 +71,7 @@ const postList: IPost[] = [
             id: crypto.randomUUID(),
             name: 'Sarah Wilson',
             email: 'sarah@example.com',
-            avatar: 'src/assets/avatar.svg'
+            avatar: 'https://ui-avatars.com/api/?background=0D8ABC&color=fff'
         } as IUser
     },
     {
@@ -82,7 +83,7 @@ const postList: IPost[] = [
             id: crypto.randomUUID(),
             name: 'John Doe',
             email: 'john@example.com',
-            avatar: 'src/assets/avatar.svg'
+            avatar: avatarIcon
         } as IUser
     }
 ];

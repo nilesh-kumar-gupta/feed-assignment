@@ -2,10 +2,16 @@
 @import "./quill.css";
 
 @layer components {
+  .bounding-container {
+    @apply bg-gray-100 rounded-3xl border border-gray-200 shadow-sm p-1;
+  }
   .input-field {
     @apply w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
   }
   .submit-button {
     @apply w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50;
+  }
+  .action-buttons {
+    @apply p-2 hover:bg-gray-200 rounded-full transition-colors;
   }
 }

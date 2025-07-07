@@ -4,6 +4,9 @@ import UserAuth from "./components/UserAuth.tsx";
 import { ROUTES } from './constants/routes';
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import { UserProvider } from "./context/UserContext";
+import {ModalProvider} from "./context/ModalContext.tsx";
+import Modal from "./components/Modal.tsx";
+import Navbar from "./components/Navbar.tsx";
 
 
 const queryClient = new QueryClient();
@@ -13,14 +16,20 @@ function App() {
     return (
         <QueryClientProvider client={queryClient}>
             <UserProvider>
-                <Router>
-                    <Routes>
-                        <Route path="/" element={<Feed/>}/>
-                        <Route path={ROUTES.FEED} element={<Feed/>}/>
-                        <Route path={ROUTES.AUTH} element={<UserAuth flowType={"SIGN_IN"}/>}/>
-                        <Route path="*" element={<Feed/>}/>
-                    </Routes>
-                </Router>
+                <ModalProvider>
+                    <Router>
+
+                        <Navbar />
+
+                        <Routes>
+                            <Route path="/" element={<Feed/>}/>
+                            <Route path={ROUTES.FEED} element={<Feed/>}/>
+                            <Route path={ROUTES.AUTH} element={<UserAuth flowType={"SIGN_IN"}/>}/>
+                            <Route path="*" element={<Feed/>}/>
+                        </Routes>
+                        <Modal />
+                    </Router>
+                </ModalProvider>
             </UserProvider>
         </QueryClientProvider>
     )

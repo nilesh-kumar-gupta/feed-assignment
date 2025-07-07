@@ -1,4 +1,5 @@
 import type {IUser} from '../types/types';
+import avatarIcon from '../../public/avatar.svg';
 
 interface AuthResponse {
     success: boolean;
@@ -14,6 +15,9 @@ const loginCredential = [
 ]
 
 export const mockSignIn = async (email: string, password: string): Promise<AuthResponse> => {
+
+    // get storage token and add it onto the request
+
     return await new Promise((resolve, reject) => {
         setTimeout(() => {
             if (loginCredential.some((cred) => cred.email === email && cred.password === password)) {
@@ -22,13 +26,10 @@ export const mockSignIn = async (email: string, password: string): Promise<AuthR
                     name: 'Test User',
                     email: email,
                     handle: '@testuser',
-                    avatar: `../assets/avatar.svg`
+                    avatar: `${avatarIcon}`
                 };
 
                 const accessToken = 'mock-jwt-token';
-
-                // // Set HTTP-only cookie
-                // document.cookie = `accessToken=${accessToken}; path=/; max-age=86400; secure; samesite=strict; httponly`;
 
                 resolve({success: true, data: {user, accessToken}});
             } else {
@@ -50,13 +51,10 @@ export const mockSignUp = async (
             name,
             email,
             handle,
-            avatar: `../assets/avatar.svg`
+            avatar: `${avatarIcon}`
         };
 
         const accessToken = 'mock-jwt-token';
-
-        // // Set HTTP-only cookie
-        // document.cookie = `accessToken=${accessToken}; path=/; max-age=86400; secure; samesite=strict; httponly`;
 
         resolve({success: true, data: {user, accessToken}});
     }, 500));
