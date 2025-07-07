@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 import {ROUTES} from "../constants/routes.ts";
 import {UserContext} from "../context/UserContext.tsx";
 import {storeAccessToken} from "../utils/utils.ts";
+import useModal from "../hooks/useModal.ts";
 
 interface SignUpProps {
     setFlow: (flow: "SIGN_IN" | "SIGN_UP") => void;
@@ -22,6 +23,7 @@ export const SignUp = ({setFlow}: SignUpProps) => {
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
     const { setUser } = useContext(UserContext);
     const navigate = useNavigate();
+    const {isOpen, closeModal} = useModal();
 
     const signUpMutation = useMutation({
         mutationFn: ({name, handle, email, password}: { name: string; handle: string; email: string; password: string }) => {
@@ -29,12 +31,14 @@ export const SignUp = ({setFlow}: SignUpProps) => {
         },
         onSuccess: (response) => {
             console.log('User created successfully!');
-            // Store user data in context
             setUser(response.data.user);
             if(response.data.accessToken)
                 storeAccessToken(response.data.accessToken);
             // Navigate to feed page
             navigate(ROUTES.FEED);
+            // if modal is open, close modal
+            if(isOpen) closeModal();
+
         },
     })
 

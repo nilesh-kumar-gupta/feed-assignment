@@ -7,6 +7,7 @@ import loginSvg from "../assets/login.svg";
 import lockSvg from "../assets/lock.svg";
 import {UserContext} from "../context/UserContext.tsx";
 import {storeAccessToken} from "../utils/utils.ts";
+import useModal from "../hooks/useModal.ts";
 
 interface SignInProps {
     setFlow: (flow: "SIGN_IN" | "SIGN_UP") => void;
@@ -18,6 +19,7 @@ export const SignIn = ({setFlow}: SignInProps) => {
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
     const navigate = useNavigate();
     const { setUser } = useContext(UserContext);
+    const {isOpen, closeModal} = useModal()
 
     const signInMutation = useMutation({
         mutationFn: ({email, password}: { email: string; password: string }) =>
@@ -30,6 +32,9 @@ export const SignIn = ({setFlow}: SignInProps) => {
 
             // Navigate to feed
             navigate(ROUTES.FEED);
+            // if modal is open, close modal
+            if(isOpen) closeModal();
+
         },
         onError: () => {
             setEmail('');

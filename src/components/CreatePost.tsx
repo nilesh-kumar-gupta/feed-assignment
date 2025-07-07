@@ -5,13 +5,14 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {QUERY_KEYS} from "../constants/queryKeys.ts";
 import {createPost} from "../services/Posts.ts";
 import {UserContext} from "../context/UserContext.tsx";
+import useModal from "../hooks/useModal.ts";
+import UserAuth from "./UserAuth.tsx";
 
 const CreatePost = () => {
     const [content, setContent] = useState('');
     const [selectedMood, setSelectedMood] = useState('😊');
     const { user, isAuthenticated } = useContext(UserContext);
-
-    console.log(isAuthenticated)
+    const { openModal } = useModal();
 
     const queryClient = useQueryClient();
     const submitMutation = useMutation({
@@ -49,6 +50,10 @@ const CreatePost = () => {
     const moods = ['😊', '🎉', '🚀', '🌴', '🎯', '☕', '💻'];
 
     const handleSubmit = () => {
+        if (!isAuthenticated){
+            openModal(<UserAuth flowType={"SIGN_IN"} />)
+            return;
+        }
         if (!content.trim()) return;
         submitMutation.mutate({content, selectedMood});
     };
@@ -84,7 +89,6 @@ const CreatePost = () => {
                 <button
                     onClick={handleSubmit}
                     className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors font-medium"
-                    disabled={!content.trim()}
                 >
                     Post
                 </button>
