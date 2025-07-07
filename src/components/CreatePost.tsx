@@ -1,21 +1,40 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
+import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {QUERY_KEYS} from "../constants/queryKeys.ts";
+import {createPost} from "../services/Posts.ts";
 
 const CreatePost = () => {
     const [content, setContent] = useState('');
     const [selectedMood, setSelectedMood] = useState('😊');
 
-    // Custom toolbar options to match the design
+    const queryClient = useQueryClient();
+    const submitMutation = useMutation({
+        mutationFn: ({content, selectedMood}: {
+            content: string,
+            selectedMood: string
+        }) => createPost(content, selectedMood),
+        onSuccess: () => {
+            console.log('Post created successfully!');
+            queryClient.invalidateQueries({queryKey: [QUERY_KEYS.POST_LIST]})
+            setContent('');
+        },
+        onError: (error) => {
+            console.error('Error creating post:', error);
+        }
+    });
+
+    // Custom toolbar options
     const modules = {
         toolbar: {
             container: [
                 ['bold', 'italic', 'underline'],
-                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                [{size: ['small', false, 'large', 'huge']}],
+                [{'list': 'ordered'}, {'list': 'bullet'}],
                 ['blockquote', 'code-block'],
-                ['clean'] // Will be styled as trash icon and moved to the end via CSS
-            ]
+                ['clean']
+            ],
         }
     };
 
@@ -23,12 +42,8 @@ const CreatePost = () => {
     const moods = ['😊', '🎉', '🚀', '🌴', '🎯', '☕', '💻'];
 
     const handleSubmit = () => {
-        // Here you would typically submit the post to your backend
-        // For now, we'll just log the content and mood
-        console.log('Post content:', content);
-        console.log('Selected mood:', selectedMood);
-        // Reset the editor after submission
-        setContent('');
+        if (!content.trim()) return;
+        submitMutation.mutate({content, selectedMood});
     };
 
     return (
@@ -36,7 +51,7 @@ const CreatePost = () => {
 
             <div className="mb-6">
                 <div className="quill-container">
-                    <ReactQuill 
+                    <ReactQuill
                         theme="snow"
                         value={content}
                         onChange={setContent}
@@ -49,7 +64,7 @@ const CreatePost = () => {
             <div className="flex justify-between items-center mt-8 pt-4 border-t border-gray-100">
                 <div className="flex items-center gap-2">
                     {moods.map((mood) => (
-                        <button 
+                        <button
                             key={mood}
                             className={`p-2 rounded-full transition-colors ${selectedMood === mood ? 'bg-gray-100' : 'hover:bg-gray-50'}`}
                             onClick={() => setSelectedMood(mood)}
@@ -59,7 +74,7 @@ const CreatePost = () => {
                     ))}
                 </div>
 
-                <button 
+                <button
                     onClick={handleSubmit}
                     className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors font-medium"
                     disabled={!content.trim()}

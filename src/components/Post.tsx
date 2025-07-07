@@ -27,9 +27,13 @@ export const Post = ({ post }: PostProps) => {
             <p className="text-sm text-gray-500">{getTimeElapsed(post.createdAt)}</p>
           </div>
 
+
           {/* Post Content */}
           <div className="mb-4">
-            <p className="text-gray-800 text-base leading-relaxed">{post.content}</p>
+            <div
+                className="text-gray-800 text-base leading-relaxed ql-editor"
+                dangerouslySetInnerHTML={{__html: post.content}}
+            />
           </div>
 
           {/* Footer - Time and Actions */}

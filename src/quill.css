@@ -1,0 +1,185 @@
+/* ReactQuill editor and content styles */
+
+.quill-container .ql-toolbar {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 8px;
+}
+
+
+.quill-container .ql-editor {
+  min-height: 120px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Ensure toolbar buttons have proper spacing and hover effects */
+.quill-container .ql-toolbar button,
+.quill-container .ql-toolbar .ql-picker {
+  margin: 0 4px;
+}
+
+/* Style for toolbar groups */
+.quill-container .ql-toolbar .ql-formats {
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.quill-container .ql-toolbar button:hover {
+  color: #3b82f6;
+}
+
+.quill-container .ql-toolbar .ql-active {
+  color: #3b82f6;
+  background-color: white;
+  border-radius: 4px;
+}
+
+/* Style for header dropdown */
+.quill-container .ql-toolbar .ql-header .ql-picker-label {
+  padding: 2px 4px;
+}
+
+.quill-container .ql-toolbar .ql-header .ql-picker-label.ql-active,
+.quill-container .ql-toolbar .ql-header .ql-picker-item.ql-selected {
+  color: #3b82f6;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.quill-container .ql-toolbar .ql-header .ql-picker-options {
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.quill-container .ql-toolbar .ql-header .ql-picker-item:hover {
+  color: #3b82f6;
+  background-color: #f9fafb;
+}
+
+
+/* Hide default Quill border when focused */
+.quill-container .ql-container:focus-within {
+  border-color: #3b82f6;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+/* Styles for rendered Quill content in posts */
+
+/* Text formatting and lists */
+.quill-container .ql-editor strong,
+.ql-editor strong {
+  font-weight: bold;
+}
+
+.quill-container .ql-editor em,
+.ql-editor em {
+  font-style: italic;
+}
+
+.quill-container .ql-editor u,
+.ql-editor u {
+  text-decoration: underline;
+}
+
+.quill-container .ql-editor ul,
+.ql-editor ul {
+  list-style-type: disc;
+  margin-left: 1.5em;
+  padding-left: 0;
+}
+
+.quill-container .ql-editor ol,
+.ql-editor ol {
+  list-style-type: decimal;
+  margin-left: 1.5em;
+  padding-left: 0;
+}
+
+.quill-container .ql-editor li,
+.ql-editor li {
+  margin-bottom: 0.5em;
+}
+
+/* Headers */
+.quill-container .ql-editor h1,
+.ql-editor h1 {
+  font-size: 2em;
+  font-weight: bold;
+  margin: 0.67em 0;
+}
+
+.quill-container .ql-editor h2,
+.ql-editor h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0.83em 0;
+}
+
+.quill-container .ql-editor h3,
+.ql-editor h3 {
+  font-size: 1.17em;
+  font-weight: bold;
+  margin: 1em 0;
+}
+
+.quill-container .ql-editor h4,
+.ql-editor h4 {
+  font-size: 1em;
+  font-weight: bold;
+  margin: 1.33em 0;
+}
+
+.quill-container .ql-editor h5,
+.ql-editor h5 {
+  font-size: 0.83em;
+  font-weight: bold;
+  margin: 1.67em 0;
+}
+
+.quill-container .ql-editor h6,
+.ql-editor h6 {
+  font-size: 0.67em;
+  font-weight: bold;
+  margin: 2.33em 0;
+}
+
+/* Block elements */
+.quill-container .ql-editor blockquote,
+.ql-editor blockquote {
+  border-left: 4px solid #e5e7eb;
+  padding-left: 16px;
+  margin: 10px 0;
+  font-style: italic;
+  color: #4b5563;
+}
+
+.quill-container .ql-editor pre.ql-syntax,
+.ql-editor pre.ql-syntax {
+  background-color: #f3f4f6;
+  border-radius: 4px;
+  padding: 12px;
+  font-family: monospace;
+  color: #1f2937;
+  overflow-x: auto;
+}
+
+.quill-container .ql-editor a,
+.ql-editor a {
+  color: #3b82f6;
+  text-decoration: underline;
+}
+
+.quill-container .ql-editor img,
+.ql-editor img {
+  max-width: 100%;
+  height: auto;
+}
