@@ -1,10 +1,12 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useMutation} from "@tanstack/react-query";
 import {mockSignIn} from "../services/Auth.ts";
 import {ROUTES} from "../constants/routes.ts";
 import loginSvg from "../assets/login.svg";
 import lockSvg from "../assets/lock.svg";
+import {UserContext} from "../context/UserContext.tsx";
+import {storeAccessToken} from "../utils/utils.ts";
 
 interface SignInProps {
     setFlow: (flow: "SIGN_IN" | "SIGN_UP") => void;
@@ -15,11 +17,18 @@ export const SignIn = ({setFlow}: SignInProps) => {
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
     const navigate = useNavigate();
+    const { setUser } = useContext(UserContext);
 
     const signInMutation = useMutation({
         mutationFn: ({email, password}: { email: string; password: string }) =>
             mockSignIn(email, password),
-        onSuccess: () => {
+        onSuccess: (response) => {
+            // Store user data in context
+            setUser(response.data.user);
+            if(response.data.accessToken)
+                storeAccessToken(response.data.accessToken);
+
+            // Navigate to feed
             navigate(ROUTES.FEED);
         },
         onError: () => {
@@ -28,7 +37,7 @@ export const SignIn = ({setFlow}: SignInProps) => {
             setErrors({invalidCredentials: 'Invalid email or password'});
         }
     });
-    
+
     const validateSignInForm = () => {
         const newErrors: { [key: string]: string } = {};
 

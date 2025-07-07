@@ -16,3 +16,7 @@ export function getTimeElapsed(date: Date) {
     }
     return `${diffInDays} ${diffInDays === 1 ? 'day' : 'days'} ago`;
 }
+
+export function storeAccessToken(token: string) {
+    localStorage.setItem('accessToken', token);
+}

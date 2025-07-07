@@ -93,8 +93,6 @@ export interface ApiResponse<T> {
 }
 
 export const mockFetchPosts = async (): Promise<ApiResponse<IPost[]>> => {
-    console.log('Fetching posts...');
-    console.log({postList});
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve({
@@ -105,15 +103,7 @@ export const mockFetchPosts = async (): Promise<ApiResponse<IPost[]>> => {
     });
 };
 
-const dummyUser: IUser = {
-    id: 'user1',
-    name: 'John Doe',
-    handle: 'johndoe',
-    email: 'john@example.com',
-    avatar: 'src/assets/avatar.svg'
-}
-
-export function createPost(content: string, selectedMood: string) {
+export function createPost(content: string, selectedMood: string, author: IUser) {
 
     console.log('Creating post...');
 
@@ -124,7 +114,7 @@ export function createPost(content: string, selectedMood: string) {
                 content: content,
                 mood: selectedMood,
                 createdAt: new Date,
-                author: dummyUser
+                author: author
             }
             postList.push(newPost);
             resolve({

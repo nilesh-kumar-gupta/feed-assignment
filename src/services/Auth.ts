@@ -8,17 +8,21 @@ interface AuthResponse {
     };
 }
 
+const loginCredential = [
+    {email: "demo@example.com", password: "password123"},
+    {email: "test@user.com", password: "testpass"}
+]
+
 export const mockSignIn = async (email: string, password: string): Promise<AuthResponse> => {
-    // Simulate API call delay
     return await new Promise((resolve, reject) => {
         setTimeout(() => {
-            if (email === 'test@example.com' && password === 'password') {
+            if (loginCredential.includes({email, password})) {
                 const user: IUser = {
                     id: '1',
                     name: 'Test User',
-                    email: 'test@example.com',
+                    email: email,
                     handle: '@testuser',
-                    avatar: 'https://via.placeholder.com/150'
+                    avatar: `../assets/avatar.svg`
                 };
 
                 const accessToken = 'mock-jwt-token';
@@ -40,14 +44,13 @@ export const mockSignUp = async (
     _password: string,
     handle: string
 ): Promise<AuthResponse> => {
-    // Simulate API call delay
     return await new Promise(resolve => setTimeout(() => {
         const user: IUser = {
-            id: Math.random().toString(36).substring(2),
+            id: crypto.randomUUID(),
             name,
             email,
             handle,
-            avatar: `https://via.placeholder.com/150?text=${encodeURIComponent(name.charAt(0))}`
+            avatar: `../assets/avatar.svg`
         };
 
         const accessToken = 'mock-jwt-token';
