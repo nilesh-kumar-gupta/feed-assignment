@@ -1,8 +1,12 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {useMutation} from "@tanstack/react-query";
 import {mockSignUp} from "../services/Auth.ts";
 import loginSvg from "../assets/login.svg";
 import lockSvg from "../assets/lock.svg";
+import {useNavigate} from "react-router-dom";
+import {ROUTES} from "../constants/routes.ts";
+import {UserContext} from "../context/UserContext.tsx";
+import {storeAccessToken} from "../utils/utils.ts";
 
 interface SignUpProps {
     setFlow: (flow: "SIGN_IN" | "SIGN_UP") => void;
@@ -16,13 +20,21 @@ export const SignUp = ({setFlow}: SignUpProps) => {
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
+    const { setUser } = useContext(UserContext);
+    const navigate = useNavigate();
 
     const signUpMutation = useMutation({
         mutationFn: ({name, handle, email, password}: { name: string; handle: string; email: string; password: string }) => {
             return mockSignUp(name, handle, email, password)
         },
-        onSuccess: () => {
+        onSuccess: (response) => {
             console.log('User created successfully!');
+            // Store user data in context
+            setUser(response.data.user);
+            if(response.data.accessToken)
+                storeAccessToken(response.data.accessToken);
+            // Navigate to feed page
+            navigate(ROUTES.FEED);
         },
     })
 

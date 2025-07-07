@@ -1,20 +1,27 @@
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {QUERY_KEYS} from "../constants/queryKeys.ts";
 import {createPost} from "../services/Posts.ts";
+import {UserContext} from "../context/UserContext.tsx";
 
 const CreatePost = () => {
     const [content, setContent] = useState('');
     const [selectedMood, setSelectedMood] = useState('😊');
+    const { user, isAuthenticated } = useContext(UserContext);
+
+    console.log(isAuthenticated)
 
     const queryClient = useQueryClient();
     const submitMutation = useMutation({
         mutationFn: ({content, selectedMood}: {
             content: string,
             selectedMood: string
-        }) => createPost(content, selectedMood),
+        }) => {
+            if(!user) throw new Error('User not authenticated');
+            return createPost(content, selectedMood, user);
+        },
         onSuccess: () => {
             console.log('Post created successfully!');
             queryClient.invalidateQueries({queryKey: [QUERY_KEYS.POST_LIST]})
